@@ -1,33 +1,59 @@
-﻿# Cursor ignore — uses .gitignore syntax. Patterns here are in addition to .gitignore.
-# https://cursor.com/docs/reference/ignore-file
+﻿# Files Cursor must not index or feed to AI.
+# Anything matched here is excluded from indexing.
 
-# Dependencies and caches
-node_modules/
+# Secrets, credentials, certificates
+*.crt
+*.key
+*.pem
+*.p12
+*.jks
+*.keystore
+.env
+.env.*
+**/.env
+**/.env.*
+**/certs/**
+**/certificates/**
+**/private/**
+
+# Salesforce auth and sensitive metadata
+**/namedCredentials/**
+**/externalCredentials/**
+**/connectedApps/**
+**/authproviders/**
+**/Integration_Metadata.*.md-meta.xml
+
+# Real or exported data that may contain PII
+data/
+**/data/**
+*.csv
+*.xls
+*.xlsx
+*.tsv
+*.bak
+*.dump
+*.sql
+**/dataExport/**
+**/exports/**
+**/reports/**
+
+# Salesforce build, cache, auth state
 .sf/
 .sfdx/
 .localdevserver/
-.pmdCache
-.eslintcache
+retrieved/
+toDeploy/
+delta/
 coverage/
-
-# Logs and local env
-logs/
+reports/
+dist/
+build/
+node_modules/
 *.log
-.env
-.env.*
 
-# Editor and git hooks (not useful for AI context)
-.vscode/
-.husky/
-
-# Salesforce binary / generated assets
-**/staticresources/**
-**/contentassets/**
-
-# LWC generated config
-**/lwc/jsconfig.json
-
-# OS files
-.DS_Store
-Thumbs.db
-[Dd]esktop.ini
+# Local scratch and generated artifacts
+.tmp_pptx_extract/
+.tmp_updated_pptx_extract/
+scratch/
+tmp/
+temp/
