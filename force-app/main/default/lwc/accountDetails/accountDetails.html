@@ -1,0 +1,104 @@
+<template>
+  <lightning-card title="Account Details">
+    <template lwc:if={isLoading}>
+      <div class="slds-is-relative slds-p-around_medium">
+        <lightning-spinner
+          alternative-text="Loading account details"
+          size="small"
+        ></lightning-spinner>
+      </div>
+    </template>
+
+    <template lwc:elseif={hasError}>
+      <div class="slds-p-around_medium">
+        <div class="slds-text-color_error" role="alert">{errorMessage}</div>
+      </div>
+    </template>
+
+    <template lwc:else>
+      <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+        <dl class="slds-dl_horizontal slds-wrap">
+          <dt class="slds-dl_horizontal__label">
+            <p class="slds-truncate" title="Name">Name</p>
+          </dt>
+          <dd class="slds-dl_horizontal__detail slds-tile__detail">
+            <p class="slds-truncate" data-field="name">{name}</p>
+          </dd>
+
+          <dt class="slds-dl_horizontal__label">
+            <p class="slds-truncate" title="Industry">Industry</p>
+          </dt>
+          <dd class="slds-dl_horizontal__detail slds-tile__detail">
+            <p class="slds-truncate" data-field="industry">{industry}</p>
+          </dd>
+
+          <dt class="slds-dl_horizontal__label">
+            <p class="slds-truncate" title="Phone">Phone</p>
+          </dt>
+          <dd class="slds-dl_horizontal__detail slds-tile__detail">
+            <p class="slds-truncate" data-field="phone">{phone}</p>
+          </dd>
+
+          <dt class="slds-dl_horizontal__label">
+            <p class="slds-truncate" title="Website">Website</p>
+          </dt>
+          <dd class="slds-dl_horizontal__detail slds-tile__detail">
+            <template lwc:if={hasWebsite}>
+              <lightning-formatted-url
+                value={website}
+                data-field="website"
+              ></lightning-formatted-url>
+            </template>
+            <template lwc:else>
+              <p class="slds-truncate" data-field="website">{websiteDisplay}</p>
+            </template>
+          </dd>
+
+          <dt class="slds-dl_horizontal__label">
+            <p class="slds-truncate" title="Annual Revenue">Annual Revenue</p>
+          </dt>
+          <dd class="slds-dl_horizontal__detail slds-tile__detail">
+            <template lwc:if={hasAnnualRevenue}>
+              <lightning-formatted-number
+                value={annualRevenue}
+                format-style="currency"
+                currency-code="USD"
+                data-field="annualRevenue"
+              ></lightning-formatted-number>
+            </template>
+            <template lwc:else>
+              <p class="slds-truncate" data-field="annualRevenue">
+                {emptyDisplay}
+              </p>
+            </template>
+          </dd>
+
+          <dt class="slds-dl_horizontal__label">
+            <p class="slds-truncate" title="Employees">Employees</p>
+          </dt>
+          <dd class="slds-dl_horizontal__detail slds-tile__detail">
+            <p class="slds-truncate" data-field="numberOfEmployees">
+              {numberOfEmployees}
+            </p>
+          </dd>
+
+          <dt class="slds-dl_horizontal__label">
+            <p class="slds-truncate" title="Billing City">Billing City</p>
+          </dt>
+          <dd class="slds-dl_horizontal__detail slds-tile__detail">
+            <p class="slds-truncate" data-field="billingCity">{billingCity}</p>
+          </dd>
+
+          <dt class="slds-dl_horizontal__label">
+            <p class="slds-truncate" title="Billing State">Billing State</p>
+          </dt>
+          <dd class="slds-dl_horizontal__detail slds-tile__detail">
+            <p class="slds-truncate" data-field="billingState">
+              {billingState}
+            </p>
+          </dd>
+        </dl>
+      </div>
+    </template>
+  </lightning-card>
+</template>
