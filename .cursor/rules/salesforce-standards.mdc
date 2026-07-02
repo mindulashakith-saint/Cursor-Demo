@@ -1,0 +1,56 @@
+---
+alwaysApply: true
+---
+
+---
+description: RACV Salesforce engineering standards, always applied
+alwaysApply: true
+---
+
+# RACV Salesforce Standards
+
+SFDX monorepo `racv_ICT/salesforce2`. Metadata lives under
+`force-app/main/default/**` and per-feature `packages/**`. Default branch is
+`Develop`. AI output is a first draft — a human reviews and commits every change.
+
+## Formatting
+
+Follow `.prettierrc`: tabs, width 4, print width 120, double quotes, semicolons.
+Don't reformat lines you didn't change.
+
+## Naming
+
+- Apex: PascalCase with the existing domain prefix (`LEI_`, `MEX_`, `APTS_`, `CB`);
+  test class `<Name>Test`.
+- LWC: camelCase folder and component.
+- Custom Labels (LEI domain): `LEI_ClubMembership_<Feature>_<MsgType>`.
+
+Match the surrounding files rather than introducing a new scheme.
+
+## Engineering
+
+- Read the sibling/related method before changing one; reuse the existing pattern
+  instead of adding new SOQL/DML.
+- Make the smallest change that solves the problem. Keep logic flat and readable —
+  `||` over nested ternaries.
+- Verify field and method API names against the metadata before using them (this
+  org uses `Status__c`, not `Apttus_Config2__Status__c`).
+- Ask when a requirement is ambiguous rather than guessing.
+
+## Data handling
+
+This is client production code.
+
+- Never put real PII, payment data, secrets, tokens, or credentials in code,
+  comments, prompts, or debug output — even temporarily.
+- Sandbox data may contain real-looking PII; treat it the same.
+- Don't send confidential logic or pricing to web search or external tools.
+
+## Finishing a change
+
+Before you stop, without being asked:
+
+1. Self-review the diff against these standards and the Apex/LWC/test rules. List
+   issues as `file:line — issue`, or state it's clean. Run `/review` for a full pass.
+2. Propose a commit message `TSIP-XXXXX: <imperative summary>` (ticket from the
+   branch name). Never run `git commit` or `git push` yourself.

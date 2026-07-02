@@ -1,0 +1,33 @@
+﻿# Cursor ignore — uses .gitignore syntax. Patterns here are in addition to .gitignore.
+# https://cursor.com/docs/reference/ignore-file
+
+# Dependencies and caches
+node_modules/
+.sf/
+.sfdx/
+.localdevserver/
+.pmdCache
+.eslintcache
+coverage/
+
+# Logs and local env
+logs/
+*.log
+.env
+.env.*
+
+# Editor and git hooks (not useful for AI context)
+.vscode/
+.husky/
+
+# Salesforce binary / generated assets
+**/staticresources/**
+**/contentassets/**
+
+# LWC generated config
+**/lwc/jsconfig.json
+
+# OS files
+.DS_Store
+Thumbs.db
+[Dd]esktop.ini

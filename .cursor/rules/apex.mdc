@@ -1,0 +1,40 @@
+---
+alwaysApply: true
+---
+
+---
+description: Apex standards
+globs: force-app/**/*.cls,force-app/**/*.trigger,packages/**/*.cls,packages/**/*.trigger
+alwaysApply: false
+---
+
+# Apex
+
+## Bulkification
+
+Assume 200+ records per transaction. No SOQL, SOSL, or DML inside loops — collect
+into maps/sets and operate on collections. For large volumes use Batch or Queueable,
+not synchronous loops.
+
+## Governor limits
+
+Query only the fields you use. Keep `WHERE` clauses selective on indexed fields for
+large objects. Avoid nested loops over large lists.
+
+## Triggers
+
+One trigger per object. No logic in the trigger body — delegate to a handler class.
+Guard against recursion.
+
+## Security
+
+Enforce CRUD/FLS before every read and write (`WITH SECURITY_ENFORCED`,
+`Security.stripInaccessible`, or explicit `isAccessible`/`isUpdateable` checks).
+Declare `with sharing` unless there's a documented reason not to. Use bind
+variables, never string-concatenated SOQL.
+
+## Errors
+
+Catch specific exceptions and throw a meaningful custom exception; don't swallow
+them. Log through the project logging framework, never `System.debug` of sensitive
+fields.

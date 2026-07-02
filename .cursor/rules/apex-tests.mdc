@@ -1,0 +1,27 @@
+---
+alwaysApply: true
+---
+
+---
+description: Test standards
+globs: force-app/**/*Test.cls,packages/**/*Test.cls,force-app/**/__tests__/**/*.js
+alwaysApply: false
+---
+
+# Tests
+
+Coverage percentage is not the goal — verification is.
+
+## Apex
+
+- Use `@testSetup` or a TestDataFactory for data. Never `SeeAllData=true`; never
+  rely on org data.
+- Assert business outcomes with messages, not just that the code ran.
+- Cover the bulk (200-record), positive, negative, and null/boundary cases.
+- Wrap the exercised call in `Test.startTest()` / `Test.stopTest()`.
+- Before trimming setup, trace the full production call chain including helpers —
+  not just the test.
+
+## LWC (Jest)
+
+Assert rendered output and events; mock Apex and wire adapters; no network calls.

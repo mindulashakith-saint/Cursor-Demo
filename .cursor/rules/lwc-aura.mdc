@@ -1,0 +1,22 @@
+---
+alwaysApply: true
+---
+
+---
+description: LWC and Aura standards
+globs: force-app/**/lwc/**/*.js,force-app/**/lwc/**/*.html,force-app/**/aura/**/*.js,packages/**/lwc/**/*.js
+alwaysApply: false
+---
+
+# LWC / Aura
+
+- Must pass `npm run lint` (`@salesforce/eslint-config-lwc`). ES modules, camelCase.
+- Use `@wire` for reactive data; handle loading and error states explicitly.
+- User-facing text comes from Custom Labels, not string literals — Aura and LWC
+  can't reference Apex constants:
+  - LWC: `import LABEL from "@salesforce/label/c.LEI_ClubMembership_..."`
+  - Aura: `$A.get("$Label.c.LEI_ClubMembership_...")`
+- Use SLDS. Check accessibility: labelled inputs, keyboard navigation, semantic markup.
+- No hardcoded IDs, org URLs, or secrets in JS. Sanitize user-supplied content
+  before rendering.
+- New or changed components ship Jest specs (`npm run test:unit`).
